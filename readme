@@ -1,0 +1,8 @@
+Trained machine learning models (Decision Trees, Neural Networks) to predict loan approvals using the German Credit dataset. Focused on feature engineering, scaling, and performance optimization.
+
+Tools
+
+- Python
+- scikit-learn
+- pandas
+- matplotlib

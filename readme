@@ -1,8 +1,146 @@
-Trained machine learning models (Decision Trees, Neural Networks) to predict loan approvals using the German Credit dataset. Focused on feature engineering, scaling, and performance optimization.
+🏦 German Credit Risk Classification Using Machine Learning
+Project Overview
 
-Tools
+This project applies machine learning classification models to the German Credit dataset to predict the binary target variable RESPONSE. The analysis emphasizes out-of-sample (test set) performance and compares multiple models and feature sets to understand tradeoffs between accuracy, precision, recall, and interpretability.
 
-- Python
-- scikit-learn
-- pandas
-- matplotlib
+Two modeling approaches are evaluated:
+
+Decision Tree Classifier
+
+Neural Network (MLPClassifier)
+
+Each model is trained using:
+
+All available features
+
+Top 5 selected features, chosen via correlation with the target variable
+
+Objectives
+
+Predict credit response outcomes (RESPONSE)
+
+Compare models using test-set performance metrics
+
+Evaluate how feature selection impacts generalization
+
+Understand tradeoffs between recall-heavy vs balanced classifiers
+
+Dataset
+
+File: GermanCredit.csv
+
+Target Variable: RESPONSE
+
+Preprocessing Steps:
+
+Missing values handled using forward fill
+
+Categorical variables encoded via one-hot encoding
+
+Cleaned dataset saved as Cleaned_GermanCredit.csv
+
+Methodology
+1. Exploratory Data Analysis
+
+Dataset structure and summary statistics
+
+Correlation heatmap across encoded variables
+
+2. Feature Selection
+
+Selected Top 5 features based on absolute correlation with RESPONSE
+
+Visualized correlation strength using bar charts
+
+3. Train/Test Split & Scaling
+
+70/30 train-test split with stratification on the target
+
+StandardScaler applied for neural network models
+
+4. Model Training & Tuning
+
+All models were tuned using GridSearchCV (cv = 3).
+
+Decision Tree tuning parameters:
+
+Criterion (gini, entropy)
+
+Max depth
+
+Leaf and split constraints
+
+Neural Network tuning parameters:
+
+Hidden layer sizes
+
+Activation functions
+
+Maximum iterations
+
+Evaluation Strategy
+
+All final results are reported on the held-out test set to measure real-world generalization.
+
+Metrics Used
+
+Accuracy
+
+Precision, Recall, and F1-score
+
+Confusion Matrices
+
+📊 Test Set Results
+Classification Performance Summary
+Model	Feature Set	Accuracy	Class 1 Recall	Macro F1
+Neural Network	Top 5	0.78	0.90	0.71
+Decision Tree	Top 5	0.72	0.94	0.56
+Neural Network	All Features	0.71	0.82	0.64
+Decision Tree	All Features	0.72	0.80	0.67
+
+Key takeaway: Feature selection significantly improved model performance, particularly for the Neural Network.
+
+Confusion Matrix Insights (Test Data)
+Decision Tree (Top 5 Features)
+
+Extremely high recall for the positive class (0.94)
+
+Very low recall for the negative class (0.20)
+
+Aggressive prediction strategy with many false positives
+
+Useful when maximizing positive detection is the priority
+
+Neural Network (Top 5 Features)
+
+Strong recall for the positive class (0.90)
+
+Substantially better balance across classes
+
+Fewer false positives and stronger true negative performance
+
+Most stable and generalizable model overall
+
+Final Model Interpretation
+
+The Neural Network using the top 5 features achieved the highest test accuracy and best overall balance between precision and recall.
+
+The Decision Tree using the top 5 features prioritized recall for the positive class at the expense of negative-class performance.
+
+Model selection ultimately depends on whether the goal is:
+
+Balanced classification performance → Neural Network
+
+Maximum sensitivity to positives → Decision Tree
+
+All conclusions are based strictly on test-set performance, not training results.
+
+Tools & Libraries
+
+Python
+
+Data: pandas, numpy
+
+Visualization: matplotlib, seaborn
+
+Machine Learning: scikit-learn
